@@ -18,7 +18,7 @@ public class Jpanel extends JPanel {
 	private static Node[][] arr = null;
 	private static ArrayList<Node> fillarr = null;
 	private static ArrayList<Node> startFinishArr = null;
-	private final int RECT_SIZE = 15;
+	private final int RECT_SIZE = 10;
 	private final int RECT_NUM = 500;
 	private final int NUM_START_FINISH = 2;
 	
@@ -89,6 +89,8 @@ public class Jpanel extends JPanel {
 				
 				Node rect = new Node(x*RECT_SIZE, y*RECT_SIZE, RECT_SIZE, RECT_SIZE);
 				arr[y][x] = rect;
+				rect.setX_arr(x);
+				rect.setY_arr(y);
 				
 			}
 		}
@@ -151,6 +153,7 @@ public class Jpanel extends JPanel {
         for (Node cell : fillarr) {
             g2d.fill(cell);
             cell.setColor(Color.GRAY);
+            System.out.println("X: "+ arr[cell.getX_arr()][cell.getY_arr()].x_arr + ", Y: "+ arr[cell.getX_arr()][cell.getX_arr()].y_arr);
             
         }
         

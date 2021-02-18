@@ -9,7 +9,26 @@ public class Node extends Rectangle2D implements Shape {
 	double height;
 	double x;
 	double y;
+	int x_arr;
+	int y_arr;
 	Color color;
+	
+	public void setX_arr(int x_arr) {
+		this.x_arr = x_arr;
+	}
+	
+	public void setY_arr(int y_arr) {
+		this.y_arr = y_arr;
+	}
+	
+	public int getX_arr() {
+		return x_arr;
+	}
+	
+	public int getY_arr() {
+		return y_arr;
+	}
+
 	
 	
 	public void setColor(Color color) {
