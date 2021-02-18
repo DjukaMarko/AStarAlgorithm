@@ -15,7 +15,7 @@ public class Jpanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static ArrayList<Node> arr = null;
+	private static Node[][] arr = null;
 	private static ArrayList<Node> fillarr = null;
 	private static ArrayList<Node> startFinishArr = null;
 	private final int RECT_SIZE = 15;
@@ -36,14 +36,17 @@ public class Jpanel extends JPanel {
 			@Override
 			public void mouseDragged(MouseEvent e) {
 				// TODO Auto-generated method stub
-				for(Node r: arr) {
-					if(r.contains(e.getPoint())) {
-						
-						if(!fillarr.contains(r) && !startFinishArr.contains(r)) {
-							fillarr.add(r);
+				for(Node[] r1: arr) {
+					for(Node r: r1) {
+						if(r.contains(e.getPoint())) {
+							
+							if(!fillarr.contains(r) && !startFinishArr.contains(r)) {
+								fillarr.add(r);
+							}
+					
 						}
-				
 					}
+			
 				}
 				repaint();
 			}
@@ -76,7 +79,7 @@ public class Jpanel extends JPanel {
 		});
 		setSize(640, 480);
 		
-		arr = new ArrayList<>(RECT_NUM);
+		arr = new Node[RECT_NUM/10][RECT_NUM/10];
 		fillarr = new ArrayList<>(RECT_NUM);
 		startFinishArr = new ArrayList<>(NUM_START_FINISH);
 		
@@ -85,7 +88,7 @@ public class Jpanel extends JPanel {
 			for(int x = 0; x < RECT_NUM/10; x++) {
 				
 				Node rect = new Node(x*RECT_SIZE, y*RECT_SIZE, RECT_SIZE, RECT_SIZE);
-				arr.add(rect);
+				arr[y][x] = rect;
 				
 			}
 		}
@@ -93,30 +96,33 @@ public class Jpanel extends JPanel {
 	}
 	
 	public void addElements(MouseEvent e) {
-		for(Node r: arr) {
-			if(r.contains(e.getPoint())) {
-				
-				if(e.getButton() == MouseEvent.BUTTON1) {
-					if(fillarr.contains(r)) {
-						fillarr.remove(r);
-					} else {
-						if(!startFinishArr.contains(r)) {
-							fillarr.add(r);
-						}
-					}
-				}
-				
-				if(e.getButton() == MouseEvent.BUTTON3) {
-					if(startFinishArr.contains(r)) {
-						startFinishArr.remove(r);
-					} else {
-						if(!fillarr.contains(r) && startFinishArr.size() < 2) {
-							startFinishArr.add(r);
+		for(Node[] r1: arr) {
+			for(Node r: r1) {
+				if(r.contains(e.getPoint())) {
+					
+					if(e.getButton() == MouseEvent.BUTTON1) {
+						if(fillarr.contains(r)) {
+							fillarr.remove(r);
+						} else {
+							if(!startFinishArr.contains(r)) {
+								fillarr.add(r);
+							}
 						}
 					}
 					
+					if(e.getButton() == MouseEvent.BUTTON3) {
+						if(startFinishArr.contains(r)) {
+							startFinishArr.remove(r);
+						} else {
+							if(!fillarr.contains(r) && startFinishArr.size() < 2) {
+								startFinishArr.add(r);
+							}
+						}
+						
+					}
 				}
 			}
+			
 		}
         repaint();
 	}
@@ -149,9 +155,12 @@ public class Jpanel extends JPanel {
         }
         
         g2d.setColor(Color.BLACK);
-        for (Node cell : arr) {
-            g2d.draw(cell);
-            g2d.setColor(Color.BLACK);
+        for (Node[] cellarr : arr) {
+        	for(Node cell: cellarr) {
+        		g2d.draw(cell);
+                g2d.setColor(Color.BLACK);
+        	}
+            
         }
         
 	}
