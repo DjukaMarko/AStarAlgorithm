@@ -30,6 +30,10 @@ public class AStarAlgorithm {
 			adjacent.add(list[x+1][y]);
 			adjacent.add(list[x][y-1]);
 			adjacent.add(list[x][y+1]);
+			adjacent.add(list[x-1][y-1]);
+			adjacent.add(list[x-1][y+1]);
+			adjacent.add(list[x+1][y-1]);
+			adjacent.add(list[x+1][y+1]);
 		}
 		return adjacent;
 	}
@@ -67,7 +71,7 @@ public class AStarAlgorithm {
 				break;
 			}
 			for(Node a: getAdjacentNodes(arr, curr)) {
-				a.setParent(curr);
+				if(a.getParent() == null) a.setParent(curr);
 				if(a.getParent().equals(source)) a.setG(10);
 				if(pq.contains(a)) continue;
 				int gOld = gScore.get(a);
@@ -76,7 +80,10 @@ public class AStarAlgorithm {
 				
 				int f = gCurrent + manhattanDistance(a, destination);
 				a.setF(f);
-				if(!visited.get(a)) pq.add(a);
+				if(!visited.get(a))  {
+					a.setParent(curr);
+					pq.add(a);
+				}
 
 			}
 			
@@ -89,8 +96,9 @@ public class AStarAlgorithm {
 
 	private void findShortestPath(Node curr, Node source) {
 		// TODO Auto-generated method stub
-		while(!curr.equals(source)) {
+		while(!curr.getParent().equals(source)) {
 			System.out.println(curr.getX_arr() + ", " + curr.getY_arr());
+			curr.setColor(Color.CYAN);
 			curr = curr.getParent();
 		}
 		//System.out.println(curr.getParent().getX_arr() + ", " + curr.getParent().getY_arr());

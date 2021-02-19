@@ -10,7 +10,7 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 	double height;
 	double x;
 	double y;
-	Node parent = null;
+	Node parent;
 	int x_arr;
 	int y_arr;
 	Color color;

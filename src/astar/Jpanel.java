@@ -181,5 +181,13 @@ public class Jpanel extends JPanel {
         	}
             
         }
+        for (Node[] cellarr : arr) {
+        	for(Node cell: cellarr) {
+        		 g2d.setColor(cell.getColor());
+        		g2d.fill(cell);
+        		g2d.setColor(Color.BLACK);
+        		g2d.draw(cell);
+        	}
+        }
 	}
 }
