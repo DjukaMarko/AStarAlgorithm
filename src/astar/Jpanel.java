@@ -1,3 +1,5 @@
+package astar;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -10,15 +12,15 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 
 public class Jpanel extends JPanel {
-
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static Node[][] arr = null;
+	AStarAlgorithm a = new AStarAlgorithm();
+	public static Node[][] arr = null;
 	private static ArrayList<Node> fillarr = null;
 	private static ArrayList<Node> startFinishArr = null;
-	private final int RECT_SIZE = 10;
+	private final int RECT_SIZE = 15;
 	private final int RECT_NUM = 500;
 	private final int NUM_START_FINISH = 2;
 	
@@ -42,6 +44,7 @@ public class Jpanel extends JPanel {
 							
 							if(!fillarr.contains(r) && !startFinishArr.contains(r)) {
 								fillarr.add(r);
+								r.setColor(Color.GRAY);
 							}
 					
 						}
@@ -72,6 +75,13 @@ public class Jpanel extends JPanel {
 				if(key == 32) {
 					fillarr.clear();
 					startFinishArr.clear();
+					for(Node[] r1: arr) {
+						for(Node r: r1) {
+							if(r.getColor() != Color.WHITE) {
+								r.setColor(Color.WHITE);
+							}
+						}
+					}
 				}
 				repaint();
 				
@@ -91,6 +101,7 @@ public class Jpanel extends JPanel {
 				arr[y][x] = rect;
 				rect.setX_arr(x);
 				rect.setY_arr(y);
+				rect.setColor(Color.WHITE);
 				
 			}
 		}
@@ -105,9 +116,11 @@ public class Jpanel extends JPanel {
 					if(e.getButton() == MouseEvent.BUTTON1) {
 						if(fillarr.contains(r)) {
 							fillarr.remove(r);
+							r.setColor(Color.WHITE);
 						} else {
 							if(!startFinishArr.contains(r)) {
 								fillarr.add(r);
+								r.setColor(Color.GRAY);
 							}
 						}
 					}
@@ -115,9 +128,11 @@ public class Jpanel extends JPanel {
 					if(e.getButton() == MouseEvent.BUTTON3) {
 						if(startFinishArr.contains(r)) {
 							startFinishArr.remove(r);
+							r.setColor(Color.WHITE);
 						} else {
 							if(!fillarr.contains(r) && startFinishArr.size() < 2) {
 								startFinishArr.add(r);
+								r.setColor(Color.RED);
 							}
 						}
 						
@@ -153,7 +168,6 @@ public class Jpanel extends JPanel {
         for (Node cell : fillarr) {
             g2d.fill(cell);
             cell.setColor(Color.GRAY);
-            System.out.println("X: "+ arr[cell.getX_arr()][cell.getY_arr()].x_arr + ", Y: "+ arr[cell.getX_arr()][cell.getX_arr()].y_arr);
             
         }
         
@@ -161,10 +175,8 @@ public class Jpanel extends JPanel {
         for (Node[] cellarr : arr) {
         	for(Node cell: cellarr) {
         		g2d.draw(cell);
-                g2d.setColor(Color.BLACK);
         	}
             
         }
-        
 	}
 }

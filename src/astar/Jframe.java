@@ -1,3 +1,5 @@
+package astar;
+
 import javax.swing.JFrame;
 
 public class Jframe extends JFrame {

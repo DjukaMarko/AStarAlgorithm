@@ -1,9 +1,10 @@
+package astar;
 
 import java.awt.Color;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
-public class Node extends Rectangle2D implements Shape {
+public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 	
 	double width;
 	double height;
@@ -12,6 +13,30 @@ public class Node extends Rectangle2D implements Shape {
 	int x_arr;
 	int y_arr;
 	Color color;
+	int h;
+	int g;
+	int f;
+	
+	public void setScores(int f, int g, int h) {
+		this.f = f;
+		this.g = g;
+		this.h = h;
+	}
+	
+	public void setF(int f) {
+		this.f = f;
+	}
+	public void setG(int g) {
+		this.g = g;
+	}
+	
+	public int getH() {
+		return h;
+	}
+	
+	public void setH(int h) {
+		this.h = h;
+	}
 	
 	public void setX_arr(int x_arr) {
 		this.x_arr = x_arr;
@@ -78,6 +103,12 @@ public class Node extends Rectangle2D implements Shape {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public Node(double x, double y, int h) {
+		this.x = x;
+		this.y = y;
+		setH(h);
+	}
 
 	@Override
 	public void setRect(double x, double y, double w, double h) {
@@ -122,6 +153,13 @@ public class Node extends Rectangle2D implements Shape {
 			return true;
 		}
 		return false;
+	}
+
+
+	@Override
+	public int compareTo(Node o) {
+		// TODO Auto-generated method stub
+		return Integer.compare(this.getH(), o.getH());
 	}
 	
 	
