@@ -16,7 +16,6 @@ public class Jpanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	AStarAlgorithm a = new AStarAlgorithm();
 	public static Node[][] arr = null;
 	private static ArrayList<Node> fillarr = null;
 	private static ArrayList<Node> startFinishArr = null;
@@ -106,6 +105,10 @@ public class Jpanel extends JPanel {
 			}
 		}
 		
+	}
+	
+	public Node[][] getArr() {
+		return arr;
 	}
 	
 	public void addElements(MouseEvent e) {

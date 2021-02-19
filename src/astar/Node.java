@@ -10,12 +10,21 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 	double height;
 	double x;
 	double y;
+	Node parent = null;
 	int x_arr;
 	int y_arr;
 	Color color;
 	int h;
 	int g;
 	int f;
+	
+	public void setParent(Node parent) {
+		this.parent = parent;
+	}
+	
+	public Node getParent() {
+		return parent;
+	}
 	
 	public void setScores(int f, int g, int h) {
 		this.f = f;
@@ -26,8 +35,16 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 	public void setF(int f) {
 		this.f = f;
 	}
-	public void setG(int g) {
+	public int getF() {
+		return f;
+	}
+	public int setG(int g) {
 		this.g = g;
+		return g;
+	}
+	
+	public int getG() {
+		return g;
 	}
 	
 	public int getH() {
@@ -102,6 +119,7 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 		this.height = height;
 		this.x = x;
 		this.y = y;
+		this.g = Integer.MAX_VALUE;
 	}
 	
 	public Node(double x, double y, int h) {
@@ -159,7 +177,7 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 	@Override
 	public int compareTo(Node o) {
 		// TODO Auto-generated method stub
-		return Integer.compare(this.getH(), o.getH());
+		return Integer.compare(this.getF(), o.getF());
 	}
 	
 	
