@@ -19,8 +19,8 @@ public class Jpanel extends JPanel {
 	public static Node[][] arr = null;
 	private static ArrayList<Node> fillarr = null;
 	private static ArrayList<Node> startFinishArr = null;
-	private final int RECT_SIZE = 15;
-	private final int RECT_NUM = 500;
+	private final int RECT_SIZE = 12;
+	private final int RECT_NUM = 800;
 	private final int NUM_START_FINISH = 2;
 	
 	public Jpanel() {
@@ -81,6 +81,9 @@ public class Jpanel extends JPanel {
 							}
 						}
 					}
+				} else if(key == 10) {
+					AStarAlgorithm a = new AStarAlgorithm();
+					a.mainAlgorithm(arr);
 				}
 				repaint();
 				

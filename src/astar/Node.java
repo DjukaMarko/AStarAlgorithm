@@ -10,6 +10,8 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 	double height;
 	double x;
 	double y;
+	int x_d;
+	int y_d;
 	Node parent;
 	int x_arr;
 	int y_arr;
@@ -94,6 +96,14 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 		return x;
 	}
 	
+	public int getMX() {
+		return x_d;
+	}
+	public int getMY() {
+		return y_d;
+	}
+	
+	
 	public double getY() {
 		return y;
 	}
@@ -119,6 +129,8 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 		this.height = height;
 		this.x = x;
 		this.y = y;
+		this.x_d = (int) x;
+		this.y_d = (int) y;
 		this.g = Integer.MAX_VALUE;
 	}
 	
@@ -133,6 +145,8 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 		// TODO Auto-generated method stub
 		this.x = x;
 		this.y = y;
+		this.x_d = (int) x;
+		this.y_d = (int) y;
 		this.width = w;
 		this.height = h;
 		
@@ -167,7 +181,7 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 	public boolean equals(Object obj) {
 		// TODO Auto-generated method stub
 		Node obj1 = (Node) obj;
-		if(this.x == obj1.x && this.y == obj1.y) {
+		if(this.x_arr == obj1.x_arr && this.y_arr == obj1.y_arr) {
 			return true;
 		}
 		return false;
