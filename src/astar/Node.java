@@ -10,14 +10,10 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 	double height;
 	double x;
 	double y;
-	int x_d;
-	int y_d;
 	Node parent;
 	int x_arr;
 	int y_arr;
 	Color color;
-	int h;
-	int g;
 	int f;
 	
 	public void setParent(Node parent) {
@@ -28,33 +24,12 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 		return parent;
 	}
 	
-	public void setScores(int f, int g, int h) {
-		this.f = f;
-		this.g = g;
-		this.h = h;
-	}
 	
 	public void setF(int f) {
 		this.f = f;
 	}
 	public int getF() {
 		return f;
-	}
-	public int setG(int g) {
-		this.g = g;
-		return g;
-	}
-	
-	public int getG() {
-		return g;
-	}
-	
-	public int getH() {
-		return h;
-	}
-	
-	public void setH(int h) {
-		this.h = h;
 	}
 	
 	public void setX_arr(int x_arr) {
@@ -95,15 +70,7 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 	public double getX() {
 		return x;
 	}
-	
-	public int getMX() {
-		return x_d;
-	}
-	public int getMY() {
-		return y_d;
-	}
-	
-	
+
 	public double getY() {
 		return y;
 	}
@@ -129,15 +96,6 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 		this.height = height;
 		this.x = x;
 		this.y = y;
-		this.x_d = (int) x;
-		this.y_d = (int) y;
-		this.g = Integer.MAX_VALUE;
-	}
-	
-	public Node(double x, double y, int f) {
-		this.x = x;
-		this.y = y;
-		setF(f);
 	}
 
 	@Override
@@ -145,8 +103,6 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 		// TODO Auto-generated method stub
 		this.x = x;
 		this.y = y;
-		this.x_d = (int) x;
-		this.y_d = (int) y;
 		this.width = w;
 		this.height = h;
 		

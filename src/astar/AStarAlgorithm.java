@@ -66,7 +66,6 @@ public class AStarAlgorithm {
 			visited.replace(curr, false, true);
 			
 			if(curr.equals(destination))  {
-				System.out.println("found the destination");
 				findShortestPath(curr, source);
 				break;
 			}

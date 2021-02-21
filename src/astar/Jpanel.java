@@ -111,8 +111,7 @@ public class Jpanel extends JPanel {
 					if(e.getButton() == MouseEvent.BUTTON1) {
 						if(r.getColor() == Color.WHITE) {
 							r.setColor(Color.GRAY);
-						}
-						if(r.getColor() == Color.GRAY) {
+						} else if(r.getColor() == Color.GRAY) {
 							r.setColor(Color.WHITE);
 						}
 					}
