@@ -16,8 +16,7 @@ public class AStarAlgorithm {
 	
 	
 	public int manhattanDistance(Node source, Node destination) {
-		return Math.abs(source.getMX() - destination.getMX()) - Math.abs(source.getMY() - destination.getMY());
-		// TODO do that
+		return Math.abs(source.getX_arr() - destination.getX_arr()) + Math.abs(source.getY_arr() - destination.getY_arr());
 	}
 	
 	
@@ -41,14 +40,6 @@ public class AStarAlgorithm {
 		return adjacent;
 	}
 	
-	public List<Node> getAdjacentTests(Node[][] list, Node curr) {
-		List<Node> adjacent = new ArrayList<>();
-		int x = curr.getX_arr();
-		int y = curr.getY_arr();
-		System.out.println(list[y][x].getX_arr() + ", " + list[y][x].getY_arr());
-		return adjacent;
-	}
-	
 	public Node mainAlgorithm(Node[][] arr) {
 		PriorityQueue<Node> pq = new PriorityQueue<>();
 		Node source = null;
@@ -65,7 +56,6 @@ public class AStarAlgorithm {
 				}
 			}
 		}
-		getAdjacentTests(arr, source);
 		gScore.replace(source, Integer.MAX_VALUE, 0);
 		pq.add(source);
 		
@@ -76,20 +66,19 @@ public class AStarAlgorithm {
 			visited.replace(curr, false, true);
 			
 			if(curr.equals(destination))  {
-				System.out.println("find the destination");
+				System.out.println("found the destination");
 				findShortestPath(curr, source);
 				break;
 			}
 			for(Node a: getAdjacentNodes(arr, curr)) {
 				if(pq.contains(a)) continue;
-				
-				if(a.getParent() == null) a.setParent(curr);
-				gScore.replace(a, Integer.MAX_VALUE, 10);
 				int gOld = gScore.get(a);
 				int parentDist = gScore.get(curr);
-				int gCurrent = gOld + parentDist;
-				gScore.replace(a, gOld, gCurrent);
-				int f = gCurrent + manhattanDistance(a, destination);
+				int gCurrent = 10 + parentDist;
+				if(gOld > gCurrent) {
+					gScore.replace(a, gOld, gCurrent);
+				}
+				int f = gScore.get(a) + manhattanDistance(a, destination);
 				
 				a.setF(f);
 				if(!visited.get(a))  {
@@ -109,10 +98,11 @@ public class AStarAlgorithm {
 
 	private void findShortestPath(Node curr, Node source) {
 		// TODO Auto-generated method stub
-		while(!curr.equals(source)) {
+		while(!curr.getParent().equals(source)) {
 			curr.setColor(Color.CYAN);
 			curr = curr.getParent();
 		}
+		curr.setColor(Color.CYAN);
 		
 	}
 

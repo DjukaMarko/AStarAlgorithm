@@ -134,10 +134,10 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 		this.g = Integer.MAX_VALUE;
 	}
 	
-	public Node(double x, double y, int h) {
+	public Node(double x, double y, int f) {
 		this.x = x;
 		this.y = y;
-		setH(h);
+		setF(f);
 	}
 
 	@Override

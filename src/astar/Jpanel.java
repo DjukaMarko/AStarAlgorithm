@@ -17,10 +17,9 @@ public class Jpanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	public static Node[][] arr = null;
-	private static ArrayList<Node> fillarr = null;
 	private static ArrayList<Node> startFinishArr = null;
-	private final int RECT_SIZE = 12;
-	private final int RECT_NUM = 800;
+	private final int RECT_SIZE = 20;
+	private final int RECT_NUM = 500;
 	private final int NUM_START_FINISH = 2;
 	
 	public Jpanel() {
@@ -40,15 +39,11 @@ public class Jpanel extends JPanel {
 				for(Node[] r1: arr) {
 					for(Node r: r1) {
 						if(r.contains(e.getPoint())) {
-							
-							if(!fillarr.contains(r) && !startFinishArr.contains(r)) {
-								fillarr.add(r);
+							if( !startFinishArr.contains(r)) {
 								r.setColor(Color.GRAY);
 							}
-					
 						}
 					}
-			
 				}
 				repaint();
 			}
@@ -72,7 +67,6 @@ public class Jpanel extends JPanel {
 				// TODO Auto-generated method stub
 				int key = e.getKeyCode();
 				if(key == 32) {
-					fillarr.clear();
 					startFinishArr.clear();
 					for(Node[] r1: arr) {
 						for(Node r: r1) {
@@ -92,7 +86,6 @@ public class Jpanel extends JPanel {
 		setSize(640, 480);
 		
 		arr = new Node[RECT_NUM/10][RECT_NUM/10];
-		fillarr = new ArrayList<>(RECT_NUM);
 		startFinishArr = new ArrayList<>(NUM_START_FINISH);
 		
 		for(int y = 0; y < RECT_NUM/10; y++) {
@@ -110,24 +103,17 @@ public class Jpanel extends JPanel {
 		
 	}
 	
-	public Node[][] getArr() {
-		return arr;
-	}
-	
 	public void addElements(MouseEvent e) {
 		for(Node[] r1: arr) {
 			for(Node r: r1) {
 				if(r.contains(e.getPoint())) {
 					
 					if(e.getButton() == MouseEvent.BUTTON1) {
-						if(fillarr.contains(r)) {
-							fillarr.remove(r);
+						if(r.getColor() == Color.WHITE) {
+							r.setColor(Color.GRAY);
+						}
+						if(r.getColor() == Color.GRAY) {
 							r.setColor(Color.WHITE);
-						} else {
-							if(!startFinishArr.contains(r)) {
-								fillarr.add(r);
-								r.setColor(Color.GRAY);
-							}
 						}
 					}
 					
@@ -136,7 +122,7 @@ public class Jpanel extends JPanel {
 							startFinishArr.remove(r);
 							r.setColor(Color.WHITE);
 						} else {
-							if(!fillarr.contains(r) && startFinishArr.size() < 2) {
+							if(startFinishArr.size() < 2) {
 								startFinishArr.add(r);
 								r.setColor(Color.RED);
 							}
@@ -170,23 +156,9 @@ public class Jpanel extends JPanel {
         	startFinishArr.get(1).setColor(Color.BLUE);
         }
         
-        g2d.setColor(Color.GRAY);
-        for (Node cell : fillarr) {
-            g2d.fill(cell);
-            cell.setColor(Color.GRAY);
-            
-        }
-        
-        g2d.setColor(Color.BLACK);
         for (Node[] cellarr : arr) {
         	for(Node cell: cellarr) {
-        		g2d.draw(cell);
-        	}
-            
-        }
-        for (Node[] cellarr : arr) {
-        	for(Node cell: cellarr) {
-        		 g2d.setColor(cell.getColor());
+        		g2d.setColor(cell.getColor());
         		g2d.fill(cell);
         		g2d.setColor(Color.BLACK);
         		g2d.draw(cell);
