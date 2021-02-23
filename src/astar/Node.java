@@ -1,10 +1,9 @@
 package astar;
 
 import java.awt.Color;
-import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
 
-public class Node extends Rectangle2D implements Shape, Comparable<Node> {
+public class Node extends Rectangle2D implements Comparable<Node> {
 	
 	double width;
 	double height;
@@ -97,10 +96,13 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public Node(int f) {
+		this.f = f;
+	}
 
 	@Override
 	public void setRect(double x, double y, double w, double h) {
-		// TODO Auto-generated method stub
 		this.x = x;
 		this.y = y;
 		this.width = w;
@@ -111,31 +113,26 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 
 	@Override
 	public int outcode(double x, double y) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public Rectangle2D createIntersection(Rectangle2D r) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Rectangle2D createUnion(Rectangle2D r) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
 		Node obj1 = (Node) obj;
 		if(this.x_arr == obj1.x_arr && this.y_arr == obj1.y_arr) {
 			return true;
@@ -146,7 +143,6 @@ public class Node extends Rectangle2D implements Shape, Comparable<Node> {
 
 	@Override
 	public int compareTo(Node o) {
-		// TODO Auto-generated method stub
 		return Integer.compare(this.getF(), o.getF());
 	}
 	

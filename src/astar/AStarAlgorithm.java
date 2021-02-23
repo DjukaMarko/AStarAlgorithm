@@ -59,7 +59,7 @@ public class AStarAlgorithm {
 		gScore.replace(source, Integer.MAX_VALUE, 0);
 		pq.add(source);
 		
-		while(!pq.isEmpty()) {
+		while(pq.size() > 0) {
 			Node curr = pq.poll();
 			if(curr.getColor() == Color.GRAY) continue;
 			curr.setColor(Color.GREEN);
@@ -70,33 +70,30 @@ public class AStarAlgorithm {
 				break;
 			}
 			for(Node a: getAdjacentNodes(arr, curr)) {
-				if(pq.contains(a)) continue;
 				int gOld = gScore.get(a);
 				int parentDist = gScore.get(curr);
 				int gCurrent = 10 + parentDist;
 				if(gOld > gCurrent) {
 					gScore.replace(a, gOld, gCurrent);
 				}
-				int f = gScore.get(a) + manhattanDistance(a, destination);
 				
+				int f = gScore.get(a) + manhattanDistance(a, destination);
 				a.setF(f);
 				if(!visited.get(a))  {
+					if(pq.contains(a)) continue;
 					a.setParent(curr);
 					if(a.getColor() != Color.GRAY) a.setColor(Color.ORANGE);
 					pq.add(a);
 				}
-
 			}
-			
-			
 		}
+				
 		return destination;
 		
 	}
 
 
 	private void findShortestPath(Node curr, Node source) {
-		// TODO Auto-generated method stub
 		while(!curr.getParent().equals(source)) {
 			curr.setColor(Color.CYAN);
 			curr = curr.getParent();

@@ -27,7 +27,6 @@ public class Jpanel extends JPanel {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
 				addElements(e);
 				
 			}
@@ -35,7 +34,6 @@ public class Jpanel extends JPanel {
 		this.addMouseMotionListener(new MouseAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				// TODO Auto-generated method stub
 				for(Node[] r1: arr) {
 					for(Node r: r1) {
 						if(r.contains(e.getPoint())) {
@@ -51,20 +49,15 @@ public class Jpanel extends JPanel {
 		this.addKeyListener(new KeyListener() {
 			
 			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
+			public void keyTyped(KeyEvent e) {	
 			}
 			
 			@Override
 			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
 			}
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
 				int key = e.getKeyCode();
 				if(key == 32) {
 					startFinishArr.clear();
@@ -138,7 +131,6 @@ public class Jpanel extends JPanel {
 
 	@Override
 	protected void paintComponent(Graphics g) {
-		// TODO Auto-generated method stub
 		super.paintComponent(g);
 
         Graphics2D g2d = (Graphics2D) g;
