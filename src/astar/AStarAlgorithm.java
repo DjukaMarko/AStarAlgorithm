@@ -1,17 +1,19 @@
 package astar;
 
-
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
+
+import javax.swing.JPanel;
 
 
 public class AStarAlgorithm {
 	
 	Map<Node, Boolean> visited = new HashMap<>();
+	List<Node> closedList = new ArrayList<>();
 	Map<Node, Integer> gScore = new HashMap<>();
 	
 	
@@ -41,14 +43,12 @@ public class AStarAlgorithm {
 	}
 	
 	public Node mainAlgorithm(Node[][] arr) {
-		PriorityQueue<Node> pq = new PriorityQueue<>();
+		List<Node> openList = new ArrayList<>();
 		Node source = null;
 		Node destination = null;
 		
 		for(int i = 0; i < arr.length; i++) {
 			for(int j = 0; j < arr[0].length; j++) {
-				gScore.put(arr[i][j], Integer.MAX_VALUE);
-				visited.put(arr[i][j], false);
 				if (arr[i][j].getColor() == Color.RED) {
 					source = arr[i][j];
 				} else if(arr[i][j].getColor() == Color.BLUE) {
@@ -56,34 +56,39 @@ public class AStarAlgorithm {
 				}
 			}
 		}
-		gScore.replace(source, Integer.MAX_VALUE, 0);
-		pq.add(source);
+		closedList.add(source);
+		openList.add(source);
 		
-		while(pq.size() > 0) {
-			Node curr = pq.poll();
+		while(openList.size() > 0) {
+			Collections.sort(openList, new CustomComparator());
+			Node curr = openList.remove(0);
 			if(curr.getColor() == Color.GRAY) continue;
+			if(!closedList.contains(curr)) closedList.add(curr);
 			curr.setColor(Color.GREEN);
-			visited.replace(curr, false, true);
 			
 			if(curr.equals(destination))  {
 				findShortestPath(curr, source);
 				break;
 			}
 			for(Node a: getAdjacentNodes(arr, curr)) {
-				int gOld = gScore.get(a);
-				int parentDist = gScore.get(curr);
-				int gCurrent = 10 + parentDist;
-				if(gOld > gCurrent) {
-					gScore.replace(a, gOld, gCurrent);
-				}
-				
-				int f = gScore.get(a) + manhattanDistance(a, destination);
-				a.setF(f);
-				if(!visited.get(a))  {
-					if(pq.contains(a)) continue;
+				if (closedList.contains(a)) continue;
+				if(a.getColor() == Color.GRAY) continue;
+
+				int parentDist = curr.getG();
+				int gCurrent = 1 + parentDist;
+				if(openList.contains(a)) {
+
+					if(a.getG() > gCurrent) {
+						a.setG(gCurrent);
+					}
+				} else {
+					a.setG(gCurrent);
 					a.setParent(curr);
-					if(a.getColor() != Color.GRAY) a.setColor(Color.ORANGE);
-					pq.add(a);
+					int f = a.getG() + manhattanDistance(a, destination);
+					a.setF(f);
+					openList.add(a);
+					a.setColor(Color.ORANGE);
+
 				}
 			}
 		}

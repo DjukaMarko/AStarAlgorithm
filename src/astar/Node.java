@@ -3,7 +3,7 @@ package astar;
 import java.awt.Color;
 import java.awt.geom.Rectangle2D;
 
-public class Node extends Rectangle2D implements Comparable<Node> {
+public class Node extends Rectangle2D {
 	
 	double width;
 	double height;
@@ -14,6 +14,27 @@ public class Node extends Rectangle2D implements Comparable<Node> {
 	int y_arr;
 	Color color;
 	int f;
+	int g;
+	int h;
+
+	public int setG(int g) {
+		this.g = g;
+		return g;
+	}
+	public int setH(int h) {
+		this.h = h;
+		return h;
+	}
+
+	public int getG() {
+		return g;
+	}
+
+	public int getH() {
+		return h;
+	}
+	
+	
 	
 	public void setParent(Node parent) {
 		this.parent = parent;
@@ -141,12 +162,5 @@ public class Node extends Rectangle2D implements Comparable<Node> {
 	}
 
 
-	@Override
-	public int compareTo(Node o) {
-		return Integer.compare(this.getF(), o.getF());
-	}
-	
-	
-
-
 }
+
