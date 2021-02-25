@@ -18,7 +18,7 @@ public class Jpanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public static Node[][] arr = null;
 	private static ArrayList<Node> startFinishArr = null;
-	private final int RECT_SIZE = 20;
+	private final int RECT_SIZE = 15;
 	private final int RECT_NUM = 500;
 	private final int NUM_START_FINISH = 2;
 	
