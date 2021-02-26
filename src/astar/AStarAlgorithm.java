@@ -3,18 +3,11 @@ package astar;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 
 public class AStarAlgorithm {
-	
-	Map<Node, Boolean> visited = new HashMap<>();
-	List<Node> closedList = new ArrayList<>();
-	Map<Node, Integer> gScore = new HashMap<>();
-	
 	
 	public int manhattanDistance(Node source, Node destination) {
 		return Math.abs(source.getX_arr() - destination.getX_arr()) + Math.abs(source.getY_arr() - destination.getY_arr());
@@ -27,13 +20,13 @@ public class AStarAlgorithm {
 		int y = curr.getY_arr();
 	
 		if(x >= 0 && x < list[0].length && y >= 0 && y < list.length) {
-			if(y -1 >= 0 && y - 1 < list.length && y+1 >= 0 && y+1 < list.length) {
-				adjacent.add(list[y-1][x]);
-				adjacent.add(list[y+1][x]);
-			}
 			if(x - 1 >= 0 && x - 1 < list[0].length && x+ 1 >= 0 && x + 1 < list[0].length) {
 				adjacent.add(list[y][x-1]);
 				adjacent.add(list[y][x+1]);
+			}
+			if(y -1 >= 0 && y - 1 < list.length && y+1 >= 0 && y+1 < list.length) {
+				adjacent.add(list[y-1][x]);
+				adjacent.add(list[y+1][x]);
 			}
 		}
 	
@@ -43,6 +36,7 @@ public class AStarAlgorithm {
 	
 	public Node mainAlgorithm(Node[][] arr) {
 		List<Node> openList = new ArrayList<>();
+		List<Node> closedList = new ArrayList<>();
 		Node source = null;
 		Node destination = null;
 		
@@ -103,7 +97,6 @@ public class AStarAlgorithm {
 			curr = curr.getParent();
 		}
 		curr.setColor(Color.CYAN);
-		
 	}
 
 }

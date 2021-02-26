@@ -37,7 +37,7 @@ public class Jpanel extends JPanel {
 				for(Node[] r1: arr) {
 					for(Node r: r1) {
 						if(r.contains(e.getPoint())) {
-							if( !startFinishArr.contains(r)) {
+							if(!startFinishArr.contains(r)) {
 								r.setColor(Color.GRAY);
 							}
 						}

@@ -117,10 +117,6 @@ public class Node extends Rectangle2D {
 		this.x = x;
 		this.y = y;
 	}
-	
-	public Node(int f) {
-		this.f = f;
-	}
 
 	@Override
 	public void setRect(double x, double y, double w, double h) {
