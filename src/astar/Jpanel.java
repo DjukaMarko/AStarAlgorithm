@@ -69,8 +69,10 @@ public class Jpanel extends JPanel {
 						}
 					}
 				} else if(key == 10) {
-					AStarAlgorithm a = new AStarAlgorithm();
-					a.mainAlgorithm(arr);
+					if(startFinishArr.size() == 2) {
+						AStarAlgorithm a = new AStarAlgorithm();
+						a.mainAlgorithm(arr);
+					}
 				}
 				repaint();
 				

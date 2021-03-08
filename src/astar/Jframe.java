@@ -18,6 +18,9 @@ public class Jframe extends JFrame {
 		add(jp);
 		setResizable(false);
 		setVisible(true);
+
+		this.revalidate();
+		this.repaint();
 	}
 
 	public static void main(String[] args) {
